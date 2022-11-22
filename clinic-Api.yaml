@@ -1,0 +1,572 @@
+openapi: 3.0.0
+info:
+  title: Clinic-API
+  version: 1.0.0
+
+servers:
+  - url: https://6325ecce70c3fa390f9166f2.mockapi.io/tarikfs/clinic
+    description: Medical Clinic Exercise
+
+paths:
+  /Patient:
+    get:
+      tags:
+        - "Patient"
+      summary: Returns a list of patients
+      responses:
+        '200':
+          description: A JSON array of patients names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: "Patient not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+    post:
+      tags:
+        - "Patient"
+      summary: "creates new Patient"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatientNoIdDTO"
+      responses:
+        '201':
+          description: "Patient created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientNoIdDTO"
+        '400':
+          description: "Improper feild data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+    delete:
+      tags:
+        - "Patient"
+      summary: "Deletes Patient"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Patient"
+      responses:
+        '204':
+          description: "Patient Deleted"
+        '401':
+          description: "Unauthorized to delete patient"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Unauthorized"
+        '404':
+          description: "Patient not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/StandardError"           
+    patch:
+      tags: 
+        - "Patient"
+      description: "Applies a partial update to Patient"
+      requestBody:
+        description: "Updates  feilds "
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        '200':
+          description: "Patient updated"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: "Patient not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+
+  /Doctor:
+    get:
+      tags:
+        - "Doctor"
+      summary: "returns a list of Doctors"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Doctor"
+        '404':
+          description: "Patient not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+    post:
+      tags:
+        - "Doctor"
+      summary: "Creates a new Doctor"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorNoIdDTO"
+      responses:
+          '201':
+            description: "Doctor created"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/DoctorNoIdDTO"
+          '400':
+            description: "Improper feild data"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/BadRequest"
+          '500':
+            description: "Internal server error"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/StandardError"
+    delete:
+      tags:
+        - "Doctor"
+      summary: "Deletes Doctor"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Doctor"
+      responses:
+        '204':
+          description: "Docoter Deleted"
+        '401':
+          description: "Unauthorized to delete patient"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Unauthorized" 
+        '404':
+          description: "Doctor not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/StandardError"
+    patch:
+      tags: 
+        - "Doctor"
+      description: "Applies a partial update to Doctor"
+      requestBody:
+        description: "Updates  feilds "
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+      responses:
+        '200':
+          description: "Doctor updated"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: "Doctor not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+
+  /MedicalAppointment: 
+    get:
+      tags:
+        - "MedicalAppointment"
+      summary: "returns a list of Medical Appointments"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MedicalAppointment"
+        '404':
+          description: "Patient not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+    post:
+      tags:
+        - "MedicalAppointment"
+      summary: "Creates a new Doctor"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalAppointmentNoIdDto"
+      responses:
+          '201':
+            description: "Doctor created"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/MedicalAppointmentNoIdDto"
+          '400':
+            description: "Improper feild data"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/BadRequest"
+          '500':
+            description: "Internal server error"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/StandardError"
+    delete:
+      tags:
+        - "MedicalAppointment"
+      summary: "Deletes Appointment"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/MedicalAppointmentNoIdDto"
+      responses:
+        '204':
+          description: "Appoinment Deleted"
+        '404':
+          description: "Appointment not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/StandardError"
+    patch:
+      tags: 
+        - "Doctor"
+      description: "Applies a partial update to Medical Appointment"
+      requestBody:
+        description: "Updates  feilds "
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalAppointment'
+      responses:
+        '200':
+          description: "Medical Appointment updated"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '404':
+          description: "Medical Appointment not found"
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/NotFound"
+        '500':
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StandardError"
+
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        Patient_id: 
+          type: integer
+        name:
+          type: string
+          minimum: 1
+          maximum: 45
+          example: "Tarik Santos"
+        cpf:
+          type: string
+          minimum: 11
+          maximum: 11
+          example: "12345678911"
+        birth_date:
+          type: string
+          format: date
+          example: "2002-07-20"
+        sex:
+          type: "string"
+          minimum: 1
+          maximum: 1
+          example: "M or F"
+  
+    PatientNoIdDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          minimum: 1
+          maximum: 45
+          example: "Tarik Santos"
+        cpf:
+          type: string
+          minimum: 11
+          maximum: 11
+          example: "12345678911"
+        birth_date:
+          type: string
+          format: date
+          example: "2002-07-20"
+        sex:
+          type: "string"
+          minimum: 1
+          maximum: 1
+          example: "M or F"
+  
+    Doctor:
+      type: object
+      properties:
+        doctor_id: 
+          type: integer
+        name:
+          type: string
+          minimum: 1
+          maximum: 45
+          example: "Tarik Santos"
+        cpf:
+          type: string
+          minimum: 11
+          maximum: 11
+          example: "12345678911"
+        crm:
+          type: string
+          minimum: 6
+          maximum: 6
+          example: "123456"
+        birth_date:
+          type: string
+          format: date
+          example: "2002-07-20"
+        sex:
+          type: "string"
+          minimum: 1
+          maximum: 1
+          example: "M or F"
+  
+    DoctorNoIdDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          minimum: 1
+          maximum: 45
+          example: "Tarik Santos"
+        cpf:
+          type: string
+          minimum: 11
+          maximum: 11
+          example: "12345678911"
+        crm:
+          type: string
+          minimum: 6
+          maximum: 6
+          example: "123456"
+        birth_date:
+          type: string
+          format: date
+          example: "2002-07-20"
+        sex:
+          type: "string"
+          minimum: 1
+          maximum: 1
+          example: "M ou F"
+ 
+    MedicalAppointment:
+      type: object
+      properties:
+        appointment_id:
+          type: integer
+        appointment_date:
+          type: string
+          format: date
+          example: "2022-09-17"
+        doctor:
+          type: string
+          minimum: 1
+          maximum: 45
+        Patient:
+          type: string
+          minimum: 1
+          maximum: 45
+        observation:
+          type: string
+          minimum: 0
+          maximum: 1000
+        active:
+          type: boolean
+   
+    MedicalAppointmentNoIdDto:
+      type: object
+      properties:
+        appointment_date:
+          type: string
+          format: date
+          example: "2022-09-17"
+        doctor:
+          type: string
+          minimum: 1
+          maximum: 45
+        Patient:
+          type: string
+          minimum: 1
+          maximum: 45
+        observation:
+          type: string
+          maximum: 1000
+        active:
+          type: boolean
+    
+    Unauthorized:
+      description: "returns this Exeption model"
+      properties:
+        timestamp:
+          type: string
+          format: date
+          example: "2022-09-18"
+        status:
+          type: integer
+          example: 401
+        mensagem:
+          type: string
+          example: "Unathorized"
+        path:
+          type: string
+          example: "/Patient/4"
+
+    StandardError:
+      description: "Returns this Exeption model."
+      properties:
+        timestamp:
+          type: string
+          format: date
+          example: "2002-05-08"
+        status:
+          type: integer
+          example: 500
+        mensagem:
+          type: string
+          example: "Internal server error."
+        path:
+          type: string
+          example: "/Patient/4"
+
+    NotFound:
+      properties:
+        timestamp:
+          type: string
+          format: date
+          example: "2002-05-08"
+        status:
+          type: integer
+          example: 404
+        mensagem:
+          type: string
+          example: "patient Not found"
+        path:
+          type: string
+          example: "/Patient/9"
+
+    BadRequest:
+      properties:
+        timestamp:
+          type: string
+          format: date
+          example: "2002-05-08"
+        status:
+          type: integer
+          example: 400
+        mensagem:
+          type: string
+          example: "Json with feild errors"
+        path:
+          type: string
+          example: "/Patient/"
