@@ -19,7 +19,7 @@ public interface MedicalAppointmentMapper {
                         MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto);
 
         @Mapping(target = "crm", source = "doctor.crm")
-        @Mapping(target = "patientCpf", source = "doctor.cpf")
+        @Mapping(target = "patientCpf", source = "patient.cpf")
         @Mapping(target = "uuid", source = "id")
         MedicalAppointmentDto toDto(MedicalAppointment medicalAppointment);
 
