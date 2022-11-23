@@ -34,6 +34,9 @@ public class MedicalAppointment implements Serializable {
 
     private Patient patient;
 
+    public MedicalAppointment() {
+    }
+
     public MedicalAppointment(Date dateTimeAppointment, String observation, Doctor doctor, Patient patient) {
         this.dateTimeAppointment = dateTimeAppointment;
         this.observation = observation;

@@ -14,7 +14,6 @@ import br.com.tarikfs.exercicio.consultorio.model.Patient;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PatientMapper {
 
-    // Unmapped target property: "id"
     @Mapping(target = "id", ignore = true)
     Patient toModel(PatientDto patientDto);
 
