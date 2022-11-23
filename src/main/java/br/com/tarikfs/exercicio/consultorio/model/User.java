@@ -21,7 +21,7 @@ public abstract class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, unique = true, nullable = false)
-    public UUID id;
+    private UUID id;
     protected String name;
     @CPF
     protected String cpf;
@@ -31,17 +31,15 @@ public abstract class User implements Serializable {
     public User() {
     }
 
-    public User(@Size(min = 1, max = 45) String name, @Length(min = 11, max = 11) @CPF String cpf, String birthDate,
+    public User(UUID id, @Size(min = 1, max = 45) String name, @Length(min = 11, max = 11) @CPF String cpf, String birthDate,
             @Length(min = 1, max = 1) String sex) {
+        this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.sex = sex;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     public String getName() {
         return name;
@@ -73,6 +71,14 @@ public abstract class User implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
 }

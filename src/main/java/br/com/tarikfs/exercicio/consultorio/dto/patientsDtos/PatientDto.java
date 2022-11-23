@@ -1,7 +1,10 @@
 package br.com.tarikfs.exercicio.consultorio.dto.patientsDtos;
 
+import java.util.UUID;
+
 public class PatientDto {
 
+    private UUID uuid;
     private String name;
     private String cpf;
     private String birthDate;
@@ -10,11 +13,20 @@ public class PatientDto {
     public PatientDto() {
     }
 
-    public PatientDto(String name, String cpf, String birthDate, String sex) {
+    public PatientDto(UUID uuid, String name, String cpf, String birthDate, String sex) {
+        this.uuid = uuid;
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
         this.sex = sex;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = " Doctor")
 public class Doctor extends User {
 
-    public String crm;
+    private String crm;
     public Doctor() {
     }
 

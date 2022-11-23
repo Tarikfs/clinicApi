@@ -37,7 +37,7 @@ public class PatientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PatientDto>> getPatientByCpf(@RequestParam String cpf) {
+    public ResponseEntity<List<PatientDto>> getPatientByCpf(@RequestParam(required = false) String cpf) {
         return ResponseEntity.status(HttpStatus.OK).body(patientService.getAllPatients(cpf));
     }
 

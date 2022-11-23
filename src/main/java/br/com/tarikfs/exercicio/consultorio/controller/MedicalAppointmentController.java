@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentDto;
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentRegistrationDto;
+import br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos.MedicalAppointmentDto;
+import br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos.MedicalAppointmentRegistrationDto;
 import br.com.tarikfs.exercicio.consultorio.service.MedicalAppointmentService;
 
 @RequestMapping(value = "/medicalappoinment")

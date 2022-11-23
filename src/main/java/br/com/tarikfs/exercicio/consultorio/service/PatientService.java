@@ -17,10 +17,10 @@ import br.com.tarikfs.exercicio.consultorio.repository.PatientRepository;
 public class PatientService {
 
     @Autowired
-    PatientRepository patientRepository;
+   private PatientRepository patientRepository;
 
     @Autowired
-    PatientMapper patientMapper;
+   private PatientMapper patientMapper;
 
     @Transactional
     public PatientDto postPatient(PatientRegistrationDto patientRegistrationDto) {

@@ -1,47 +1,49 @@
 package br.com.tarikfs.exercicio.consultorio.mapper;
 
+import br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos.MedicalAppointmentDto;
+import br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos.MedicalAppointmentRegistrationDto;
+import br.com.tarikfs.exercicio.consultorio.model.MedicalAppointment;
 import java.util.List;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentDto;
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentPatchDto;
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentRegistrationDto;
-import br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos.MedicalAppointmentSumedUpDto;
-import br.com.tarikfs.exercicio.consultorio.model.MedicalAppointment;
-
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface MedicalAppointmentMapper {
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "doctor.id", ignore = true)
-    @Mapping(target = "patient.id", ignore = true)
-    MedicalAppointment toModel(MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto);
 
-    MedicalAppointmentDto toDto(MedicalAppointment medicalAppointment);
+        @Mapping(target = "doctor", ignore = true)
+        @Mapping(target = "patient", ignore = true)
+        @Mapping(target = "id", ignore = true)
+        @Mapping(target = "active", ignore = true)
+        MedicalAppointment toModel(
+                        MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "doctor.id", ignore = true)
-    @Mapping(target = "patient.id", ignore = true)
-    MedicalAppointment mapPutModel(MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto,
-                    @MappingTarget MedicalAppointment MedicalAppointment);
+        @Mapping(target = "crm", source = "doctor.crm")
+        @Mapping(target = "patientCpf", source = "doctor.cpf")
+        @Mapping(target = "uuid", source = "id")
+        MedicalAppointmentDto toDto(MedicalAppointment medicalAppointment);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "doctor.id", ignore = true)
-    @Mapping(target = "patient.id", ignore = true)
-    MedicalAppointment mapPatchModel(MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto,
-                    @MappingTarget MedicalAppointment MedicalAppointment);
+        List<MedicalAppointmentDto> toListDto(
+                        List<MedicalAppointment> medicalAppointments);
 
-    MedicalAppointmentSumedUpDto toSumedUpDto(MedicalAppointment medicalAppointment);
+        @Mapping(target = "doctor", ignore = true)
+        @Mapping(target = "id", ignore = true)
+        @Mapping(target = "patient", ignore = true)
+        @Mapping(target = "active", ignore = true)
+        MedicalAppointment mapPutModel(
+                        MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto,
+                        @MappingTarget MedicalAppointment medicalAppointment);
 
-    MedicalAppointmentRegistrationDto toDtoRegistration(MedicalAppointment medicalAppointment);
+        @Mapping(target = "doctorUuid", ignore = true)
+        @Mapping(target = "patientUuid", ignore = true)
+        MedicalAppointmentRegistrationDto toDtoRegistration(
+                        MedicalAppointment medicalAppointment);
 
-    List<MedicalAppointmentDto> toListDto(List<MedicalAppointment> listAll);
-
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "dateTime", ignore = true)
-    MedicalAppointment mapPatchModel(MedicalAppointmentPatchDto medicalAppointmentPatchDto,
-                    @MappingTarget MedicalAppointment medicalAppointment);
+        @Mapping(target = "doctor", ignore = true)
+        @Mapping(target = "id", ignore = true)
+        @Mapping(target = "patient", ignore = true)
+        @Mapping(target = "active", ignore = true)
+        MedicalAppointment mapPatchModel(
+                        MedicalAppointmentRegistrationDto medicalAppointmentRegistrationDto,
+                        @MappingTarget MedicalAppointment medicalAppointment);
 }

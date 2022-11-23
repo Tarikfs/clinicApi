@@ -38,7 +38,7 @@ public class DoctorController {
 
 
     @GetMapping
-    public ResponseEntity<List<DoctorDto>> getDoctorByCrm(@RequestParam String crm) {
+    public ResponseEntity<List<DoctorDto>> getDoctorByCrm(@RequestParam(required = false) String crm) {
         return ResponseEntity.status(HttpStatus.OK).body(doctorService.getsAllDoctors(crm));
     }
 

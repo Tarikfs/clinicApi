@@ -1,4 +1,4 @@
-package br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos;
+package br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos;
 
 import java.sql.Date;
 
@@ -11,8 +11,8 @@ public class MedicalAppointmentPatchDto {
     private String observation;
     private boolean active;
 
-    public Doctor doctor;
-    public Patient patient;
+    private Doctor doctor;
+    private Patient patient;
 
     public MedicalAppointmentPatchDto() {
     }

@@ -1,12 +1,12 @@
-package br.com.tarikfs.exercicio.consultorio.dto.MedicalAppointmentsDtos;
+package br.com.tarikfs.exercicio.consultorio.dto.medicalappointmentsdtos;
 
 import br.com.tarikfs.exercicio.consultorio.model.Doctor;
 import br.com.tarikfs.exercicio.consultorio.model.Patient;
 
 public class MedicalAppointmentSumedUpDto {
 
-    public Patient patient;
-    public Doctor doctor;
+    private Patient patient;
+    private Doctor doctor;
     private boolean active;
 
 

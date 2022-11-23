@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class MedicalAppointment implements Serializable {
@@ -22,31 +21,25 @@ public class MedicalAppointment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "appointment_id", updatable = false, unique = true, nullable = false)
-    public UUID id;
+    private UUID id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd-HH:mm")
-    protected Date dateTime;
+    private Date dateTimeAppointment;
 
     protected String observation;
-    protected boolean active;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private boolean active;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    public MedicalAppointment() {
-    }
-
-    public MedicalAppointment(UUID id, Date dateTime, String observation, boolean active, Doctor doctor,
-            Patient patient) {
-        this.id = id;
-        this.dateTime = dateTime;
+    public MedicalAppointment(Date dateTimeAppointment, String observation, Doctor doctor, Patient patient) {
+        this.dateTimeAppointment = dateTimeAppointment;
         this.observation = observation;
-        this.active = active;
         this.doctor = doctor;
         this.patient = patient;
+        this.active = true;
     }
 
     public static long getSerialversionuid() {
@@ -61,12 +54,12 @@ public class MedicalAppointment implements Serializable {
         this.id = id;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public Date getDateTimeAppointment() {
+        return dateTimeAppointment;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTimeAppointment(Date dateTimeAppointment) {
+        this.dateTimeAppointment = dateTimeAppointment;
     }
 
     public String getObservation() {
@@ -101,6 +94,4 @@ public class MedicalAppointment implements Serializable {
         this.patient = patient;
     }
 
-    
-   
 }
